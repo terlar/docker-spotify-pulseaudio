@@ -10,7 +10,7 @@ Run Spotify inside an isolated [Docker](http://www.docker.io) container. This is
 
 3. Restart PulseAudio.
 
-4. [Install Docker](http://docs.docker.io/en/latest/installation/) if you haven't already
+4. [Install Docker](http://docs.docker.io/en/latest/installation/) if you haven't already.
 
 5. Clone this repository and change to the directory:
 
@@ -18,7 +18,7 @@ Run Spotify inside an isolated [Docker](http://www.docker.io) container. This is
   git clone https://github.com/terlar/docker-spotify-pulseaudio.git && cd docker-spotify-pulseaudio
   ```
 
-6. Build the container
+6. Build the container:
 
   ```sh
   sudo docker build -t spotify .
@@ -37,13 +37,13 @@ Run Spotify inside an isolated [Docker](http://www.docker.io) container. This is
     ForwardX11Trusted yes
   ```
 
-8. Run the container and forward the appropriate port
+8. Run the container and forward the appropriate port:
 
   ```sh
   docker run --name spotify --rm -p 22122:22 spotify
   ```
 
-9. Connect via SSH and launch Spotify using the provided PulseAudio wrapper script.
+9. Connect via SSH and launch Spotify using the provided PulseAudio wrapper script:
 
   ```sh
   ssh docker-spotify spotify-pulseaudio
