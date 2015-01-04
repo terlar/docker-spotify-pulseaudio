@@ -6,7 +6,7 @@ Run Spotify inside an isolated [Docker](http://www.docker.io) container. This is
 
 1. Install [PulseAudio Preferences](http://freedesktop.org/software/pulseaudio/paprefs/).
 
-2. Launch PulseAudio Preferences, go to the *"Network Server"* tab, and check the *"Enable network access to local sound devices"* and *"Don't require authentication"* checkboxes.
+2. Launch PulseAudio Preferences, go to the **"Network Server"** tab, and check the **"Enable network access to local sound devices"** and **"Don't require authentication"** checkboxes.
 
 3. Restart PulseAudio.
 
