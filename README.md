@@ -28,9 +28,9 @@ Run Spotify inside an isolated [Docker](http://www.docker.io) container. This is
 
   ```sh
   Host docker-spotify
-    User docker
+    User spotify
     Port 22122
-    HostName 127.0.0.1
+    HostName localhost
     RemoteForward 64713 localhost:4713
     ForwardAgent yes
     ForwardX11 yes
@@ -43,10 +43,19 @@ Run Spotify inside an isolated [Docker](http://www.docker.io) container. This is
   docker run --name spotify --rm -p 22122:22 spotify
   ```
 
+  Alternatively if you want to save the configuration between restarts:
+
+  ```sh
+  ```
+  docker run --name spotify --rm -v /path/to/spotifydata:/data/spotify -p 22122:22 spotify
+  ```
+
 9. Connect via SSH and launch Spotify using the provided PulseAudio wrapper script:
 
   ```sh
   ssh docker-spotify spotify-pulseaudio
   ```
+
+  Password is `spotify`.
 
 10. Use Spotify.

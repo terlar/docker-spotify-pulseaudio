@@ -17,19 +17,24 @@ RUN \
   mkdir -p /var/run/sshd && \
   echo X11Forwarding yes >> /etc/ssh/ssh_config
 
-# Create user "docker" and set the password to "docker".
+# Create spotify user.
 RUN \
-  useradd -m -d /home/docker docker && \
-  echo "docker:docker" | chpasswd && \
-  mkdir /home/docker/.ssh && \
-  chown -R docker:docker /home/docker && \
-  chown -R docker:docker /home/docker/.ssh
+  groupadd -r spotify && \
+  useradd -r -m -g spotify spotify && \
+  echo "spotify:spotify" | chpasswd
 
 # Set up the launch wrapper.
 RUN \
   echo 'export PULSE_SERVER="tcp:localhost:64713"' >> /usr/local/bin/spotify-pulseaudio && \
   echo 'spotify' >> /usr/local/bin/spotify-pulseaudio && \
   chmod 755 /usr/local/bin/spotify-pulseaudio
+
+# Spotify data.
+RUN \
+  mkdir -p /data/spotify && \
+  chown -R spotify:spotify /data/spotify && \
+  mkdir -p /home/spotify/.config && \
+  ln -s /data/spotify /home/spotify/.config/spotify
 
 # Start SSH.
 ENTRYPOINT ["/usr/sbin/sshd", "-D"]
