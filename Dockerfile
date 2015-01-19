@@ -8,7 +8,6 @@ RUN echo "deb http://repository.spotify.com stable non-free" >> /etc/apt/sources
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		pulseaudio \
-		curl \
 		libpangoxft-1.0-0 \
 		spotify-client \
 	&& rm -rf /var/lib/apt/lists/*
