@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-if docker inspect -f "{{ .Name }}" spotify | grep '/spotify'; then
+if docker inspect -f "{{ .Name }}" spotify | grep -q '/spotify'; then
 	docker restart spotify
 else
 	USER_UID=$(id -u)
