@@ -8,6 +8,7 @@ RUN echo "deb http://repository.spotify.com stable non-free" >> /etc/apt/sources
 	&& apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 94558F59 \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends \
+		ttf-wqy-zenhei \
 		pulseaudio \
 		curl \
 		libpangoxft-1.0-0 \
