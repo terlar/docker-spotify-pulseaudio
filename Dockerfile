@@ -30,7 +30,7 @@ RUN mkdir -p /data/cache \
 	&& mkdir -p /data/config
 
 # PulseAudio server.
-ENV PULSE_SERVER=/run/pulse/native
+ENV PULSE_SERVER /run/pulse/native
 
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
