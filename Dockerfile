@@ -13,7 +13,7 @@ RUN echo "deb http://repository.spotify.com stable non-free" >> /etc/apt/sources
 		curl \
 		libpangoxft-1.0-0 \
 		spotify-client \
-	&& curl -Lo libgcrypt11.deb http://ftp.de.debian.org/debian/pool/main/libg/libgcrypt11/libgcrypt11_1.5.4-3_amd64.deb \
+	&& curl -Lo libgcrypt11.deb http://ftp.de.debian.org/debian/pool/main/libg/libgcrypt11/libgcrypt11_1.4.5-2+squeeze3_amd64.deb \
 	&& curl -Lo libudev0.deb http://ftp.de.debian.org/debian/pool/main/u/udev/libudev0_175-7.2_amd64.deb \
 	&& apt-get purge -y --auto-remove curl \
 	&& { dpkg -i libgcrypt11.deb || true; } \
