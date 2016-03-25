@@ -1,26 +1,13 @@
-FROM debian:jessie
+FROM ubuntu:14.04
 MAINTAINER Terje Larsen
 
 # Install Spotify and PulseAudio.
 WORKDIR /usr/src
-RUN echo "deb http://repository.spotify.com stable non-free" >> /etc/apt/sources.list \
-	&& echo "deb-src http://repository.spotify.com stable non-free" >> /etc/apt/sources.list \
-	&& apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 94558F59 D2C19886 \
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886 \
+	&& echo deb http://repository.spotify.com stable non-free > /etc/apt/sources.list.d/spotify.list \
 	&& apt-get update \
-	&& apt-get install -y --no-install-recommends \
-		ttf-wqy-zenhei \
-		pulseaudio \
-		curl \
-		libpangoxft-1.0-0 \
-		spotify-client \
-	&& curl -Lo libgcrypt11.deb http://ftp.de.debian.org/debian/pool/main/libg/libgcrypt11/libgcrypt11_1.4.5-2+squeeze3_amd64.deb \
-	&& curl -Lo libudev0.deb http://ftp.de.debian.org/debian/pool/main/u/udev/libudev0_175-7.2_amd64.deb \
-	&& apt-get purge -y --auto-remove curl \
-	&& { dpkg -i libgcrypt11.deb || true; } \
-	&& rm libgcrypt11.deb \
-	&& { dpkg -i libudev0.deb || true; } \
-	&& rm libudev0.deb \
-	&& rm -rf /var/lib/apt/lists/* \
+	&& apt-get install -y spotify-client pulseaudio xdg-utils libxss1 \
+	&& apt-get clean \
 	&& echo enable-shm=no >> /etc/pulse/client.conf
 
 # Spotify data.
