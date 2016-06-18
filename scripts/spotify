@@ -7,7 +7,7 @@ else
 	USER_UID=$(id -u)
 	USER_GID=$(id -g)
 
-	docker run --rm \
+xhost + && docker run --rm \
 		--env=USER_UID=$USER_UID \
 		--env=USER_GID=$USER_GID \
 		--env=DISPLAY=unix$DISPLAY \
