@@ -23,17 +23,3 @@ Run Spotify inside an isolated [Docker](http://www.docker.io) container. This is
   ```
 
 4. Use Spotify.
-
-## Troubleshooting
-
-Q: After running scripts/spotify I get:
-
-  ```
-  (spotify:29): Gtk-WARNING **: cannot open display: unix:0
-  ```
-
-A: You need to allow connections to the X server:
-
-  ```sh
-  xhost +
-  ```
