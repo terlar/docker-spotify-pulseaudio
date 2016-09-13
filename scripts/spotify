@@ -6,6 +6,7 @@ if [[ -n "$(docker ps -qaf 'name=spotify')" ]]; then
 else
 	USER_UID=$(id -u)
 	USER_GID=$(id -g)
+	xhost +local:docker
 
 	docker run --rm \
 		--env=USER_UID=$USER_UID \
