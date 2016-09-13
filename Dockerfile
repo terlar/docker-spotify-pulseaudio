@@ -7,21 +7,30 @@ RUN echo "deb http://repository.spotify.com stable non-free" >> /etc/apt/sources
 	&& echo "deb-src http://repository.spotify.com stable non-free" >> /etc/apt/sources.list \
 	&& apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 94558F59 D2C19886 \
 	&& apt-get update \
-	&& apt-get install -y --no-install-recommends \
+	&& apt-get install -y \
+		libgl1-mesa-glx \
 		ttf-wqy-zenhei \
-		xdg-utils \
+	&& apt-get install -y --no-install-recommends \
 		pulseaudio \
-		curl \
-		libpangoxft-1.0-0 \
+		libasound2 \
+		libc6 \
+		libqt4-dbus \
+		libqtcore4 \
+		libqtgui4 \
+		libqt4-network \
+		libstdc++6 \
 		libxss1 \
+		usbutils \
+		libssl1.0.0 \
+		libnspr4-0d \
+		libgconf2-4 \
+		libgtk2.0-0 \
+		libnss3-1d \
+		libglib2.0-0 \
+		xdg-utils \
+		dbus-x11 \
+		libudev1 \
 		spotify-client \
-	&& curl -Lo libgcrypt11.deb http://ftp.de.debian.org/debian/pool/main/libg/libgcrypt11/libgcrypt11_1.5.0-5+deb7u4_amd64.deb \
-	&& curl -Lo libudev0.deb http://ftp.de.debian.org/debian/pool/main/u/udev/libudev0_175-7.2_amd64.deb \
-	&& apt-get purge -y --auto-remove curl \
-	&& { dpkg -i libgcrypt11.deb || true; } \
-	&& rm libgcrypt11.deb \
-	&& { dpkg -i libudev0.deb || true; } \
-	&& rm libudev0.deb \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& echo enable-shm=no >> /etc/pulse/client.conf
 
