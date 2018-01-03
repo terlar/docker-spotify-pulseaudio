@@ -1,15 +1,15 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER Terje Larsen
 
 # Install Spotify and PulseAudio.
 WORKDIR /usr/src
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886 \
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0DF731E45CE24F27EEEB1450EFDC8610341D9410 \
 	&& echo deb http://repository.spotify.com stable non-free > /etc/apt/sources.list.d/spotify.list \
 	&& apt-get update \
 	&& apt-get install -y \
 		spotify-client xdg-utils libxss1 \
 		pulseaudio \
-		ttf-wqy-zenhei \
+		fonts-noto \
 	&& apt-get clean \
 	&& echo enable-shm=no >> /etc/pulse/client.conf
 

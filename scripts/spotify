@@ -6,15 +6,16 @@ if [[ -n "$(docker ps -qaf 'name=spotify')" ]]; then
 else
 	USER_UID=$(id -u)
 	USER_GID=$(id -g)
-	xhost +local:docker
+	xhost "si:localuser:${USER}"
 
-	docker run --rm \
-		--env=USER_UID=$USER_UID \
-		--env=USER_GID=$USER_GID \
-		--env=DISPLAY=unix$DISPLAY \
-		--volume=/tmp/.X11-unix:/tmp/.X11-unix:ro \
-		--volume=/run/user/$USER_UID/pulse:/run/pulse:ro \
-		--volume=$HOME/.docker-volumes/spotifyconfig:/data/config \
-		--name spotify \
+	docker run --rm --name spotify \
+		-e "USER_UID=${USER_UID}" \
+		-e "USER_GID=${USER_GID}" \
+		-e "DISPLAY=unix${DISPLAY}" \
+		-v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+		-v "/run/user/${USER_UID}/pulse:/run/pulse:ro" \
+		-v "${HOME}/.spotify/config:/data/config" \
+		-v "${HOME}/.spotify/cache:/data/cache" \
+		--device /dev/dri \
 		spotify
 fi
