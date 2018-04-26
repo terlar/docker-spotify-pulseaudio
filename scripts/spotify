@@ -8,6 +8,10 @@ else
 	USER_GID=$(id -g)
 	xhost "si:localuser:${USER}"
 
+	[[ ${DBUS_SESSION_BUS_ADDRESS} =~ 'unix:path'\
+		 && -S ${DBUS_SESSION_BUS_ADDRESS#*=} ]]\
+		 && DBUS=${DBUS_SESSION_BUS_ADDRESS#*=}
+
 	docker run --rm --name spotify \
 		-e "USER_UID=${USER_UID}" \
 		-e "USER_GID=${USER_GID}" \
@@ -16,6 +20,8 @@ else
 		-v "/run/user/${USER_UID}/pulse:/run/pulse:ro" \
 		-v "${HOME}/.spotify/config:/data/config" \
 		-v "${HOME}/.spotify/cache:/data/cache" \
+		${DBUS:+-v "${DBUS}:/run/dbus"} \
+		${DBUS:+-e "DBUS_SESSION_BUS_ADDRESS=/run/dbus"} \
 		--device /dev/dri \
 		spotify
 fi
